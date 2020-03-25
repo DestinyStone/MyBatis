@@ -1,0 +1,65 @@
+1， 构建javaBean， 所谓javaBean 就是 一个特殊的类， 该类的属性与数据库字段一一对应
+如数据库字段
+    create table persion(id int primary key, name nvarchar(20))
+该类则为
+public class Persion {	
+	private int id;
+	private String name;
+	
+	public int getId() {return id;}
+	public void setId(int id) {this.id = id;}
+	public String getName() {return name;}
+	public void setName(String name) {this.name = name;}	
+}
+
+2， 构建该javaBean的xml文件， 用来联系javaBean， 并执行sql语句
+步骤 
+1. 创建 persionMapper.xml 空文件
+2. 拷贝以下内容, 粘贴到文件中
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bean.PersionMapper">
+	 <select id="selectById" resultType="beam.Persion" parameterType="int">
+	 	select * from persion where id = #{id}
+	 </select>
+</mapper>
+
+细节，  namespace 为该mapper文件的全路径
+
+3， 构建mybatis配置文件  conf.xml, 用于联系mapper.xml和数据库
+1. 创建conf.xml 空文件
+2. 拷贝以下内容, 粘贴到文件中
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration>  
+	<environments default="development">    
+		<environment id="development">      
+	    <transactionManager type="JDBC"/>      
+	    <dataSource type="POOLED">        
+	        <property name="driver" value="com.mysql.jdbc.Driver"/>        
+	        <property name="url" value="jdbc:mysql://localhost:3306/logintest"/>        
+	        <property name="username" value="root"/>        
+	        <property name="password" value="1314LOVE"/>      
+	    </dataSource>    
+	     </environment>  
+    </environments>  
+    <mappers>    
+        <mapper resource="bean/PersionMapper.xml"/>  
+    </mappers> 
+</configuration>
+
+4, 运行
+public class Test {
+	public static void main(String[] args) throws IOException {
+		Reader reader = Resources.getResourceAsReader("conf.xml");	// 加载该配置文件	
+		SqlSessionFactory sqlsessionfactory = new SqlSessionFactoryBuilder().build(reader);		
+		SqlSession session = sqlsessionfactory.openSession();		
+		String statement = "bean.PersionMapper.selectById";	  // namespace + id
+		Persion persion = session.selectOne(statement, 1);	                 // 第二个为输入参数
+		System.out.print(persion.getName());
+	}
+}
+	
