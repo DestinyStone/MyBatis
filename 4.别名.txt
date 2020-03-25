@@ -1,0 +1,11 @@
+解决问题 mapper.xml 文件中设置的返回值等参数需要使用全类名过于麻烦
+注意： 别名忽略大小写 
+1， 设置单个别名(config.xml configuration标签下设置)
+  <typeAliases>
+    <typeAlias type="bean.Persion" alias="Persion" />   
+ <typeAliases>
+
+2， 批量定义别名(引用包名， 别名为该类名)
+  <typeAliases>
+    <package name="bean">   
+ <typeAliases>
