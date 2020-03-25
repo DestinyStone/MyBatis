@@ -1,0 +1,9 @@
+解决问题， config.xml 文件的属性为死数据
+1， 创建文件 db.properties 并声明各项属性数值
+	driver=com.mysql.jdbc.Driver
+	url=jdbc:mysql://localhost:3306/logintest
+	username=root
+	passwd=1314LOVE
+2,   config.xml configuration标签中 引入该文件 
+	<properties resource="db.properties" />
+3, 各项属性使用 "${driver}" 引入
