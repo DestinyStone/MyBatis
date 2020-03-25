@@ -1,0 +1,14 @@
+1. 基于 statement的方式(麻烦， 需要一直构建statement语句)
+		String statement = "bean.PersionMapper.selectById";	  // namespace + id
+		Persion persion = session.selectne(statement, 1);	  	
+
+2. 基于动态代理方式(推荐， 使用接口)
+  方式： 约定大于配置
+	定义接口， 名称与mapper.xml名称一样即可 
+  约定
+	1， 方法名与mapper.xml的id值一样
+	2,    输入参数与mapper.xml中的输入参数一致， 返回值同理
+	3， 修改namespace 修改成接口的全类名
+  使用 
+	PersionMapper persionMapper = session.getMapper(PersionMapper.class);
+	Persion persion = persionMapper.selectById(1);
