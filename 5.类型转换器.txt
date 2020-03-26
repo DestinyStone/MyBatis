@@ -1,0 +1,4 @@
+问题： javaBean 中的类型中  true：男 false： 女       数据库表中 1：男    0女    怎么实现两者的对应关系
+
+步骤， 
+a. 创建转换器(普通类 继承于 BaseTypeHandler, 并实现接口)
