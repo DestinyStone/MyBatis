@@ -1,0 +1,37 @@
+问题： 在多标签选项中， 要使用同一条sql经行任意标签的执行
+本质上是sql语句的动态拼接
+
+1. if
+select * from persion where
+<if test="name != null and stuname!='' ">
+	name = #{name}
+</if>
+<if test="age != null and age!='' ">
+	and age = #{age}
+</if>
+
+2. where（自动处理第一个and， 并补写where）
+select * from persion
+<where>
+	<if test="name != null and stuname!='' ">
+		and name = #{name}
+	</if>
+	<if test="age != null and age!='' ">
+		and age = #{age}
+	</if>
+</where>
+
+3. foreach  (应用： 如 同时查找多个id的人)
+可迭代类型： 数组， 集合， 对象数组， 属性
+基本使用
+  <foreach  item="任意名字(代表表里的属性中的每一项元素)" collection="遍历的属性" open=" and id in (" close=")"  separator=",">
+	#{id}
+  </foreach>
+
+迭代属性注意事项
+1, 简单类型数组  parameter="int[]"  collection="array"    // 数组固定名称 array
+2, 对象数组 parameter="object[]"  collection="array" 遍历时  使用    使用object[]代替
+3, 集合  使用 list 代替
+4, 属性  属性名称
+
+

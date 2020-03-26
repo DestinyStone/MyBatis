@@ -1,0 +1,17 @@
+1， resultType
+  当bean中属性与表中字段的类型均可以相互识别， 可使用   如（String - nvarchar(20)）
+  使用： resultType="Persion"
+
+  a.简单类型(简单)
+  b.对象类型(简单)
+  c. 集合类型(接口声明使用 List<Persion> persions  但resultType="persion")
+
+2， resultMap
+  反之，如（bean中属性存在自定义类， 或者自定义的类型转换器， 或名称不同） 
+  使用： 
+    resultMap = "自定义id"
+    <resultMap type="student" id="自定义id">
+    	<id property="bean属性名" column="表字段名"/>   //主键使用
+	<result property="" column=""/>                //id使用
+	<result property="" column=""   javaType="boolean"  jdbcType="Integer"/>   // 指定类型转换器
+    </resultMap>
