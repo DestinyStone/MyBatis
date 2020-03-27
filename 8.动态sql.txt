@@ -31,7 +31,11 @@ select * from persion
 迭代属性注意事项
 1, 简单类型数组  parameter="int[]"  collection="array"    // 数组固定名称 array
 2, 对象数组 parameter="object[]"  collection="array" 遍历时  使用    使用object[]代替
-3, 集合  使用 list 代替
+3, 集合  parameter="list"  collection="list"
+	注意： foreach 只能遍历一层属性， 访问集合中的某个元素的某个属性可使用 ${persion.id} 访问
+	如：<foreach item="persion" collection="list" open="id in (" close=")" separator=",">
+	 	${persion.id}
+	       </foreach>
 4, 属性  属性名称
 
 
