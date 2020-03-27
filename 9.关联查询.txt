@@ -1,0 +1,29 @@
+1， 一对一
+如 Persion 和 Card 表 中要同时返回persion， card 中间使用id关联
+a. 业务扩展类(不推荐， 小型项目可以使用)
+	定义另一个类PersionAndCrad 包含Persion和Crad 的所有属性
+	一般是继承一个属性多的类， 重写属性少的类
+b. 建立属性成员(推荐)
+	presion类中 包含一个属性为crad
+
+2， 一对多
+方法，建立list的成员属性  如 grade类中建立 List<Persion> persions
+
+
+
+resultMap 的使用
+一对一
+<resultMap id="PersionAndCrad" type="Persion">
+	 <id property="id" column="id"/>
+	 <result property="Name" column="name"/>
+	 <association property="persionCrad" javaType="PersionCrad">
+	 	<id property="id" column="id"/>	
+	 	<result property="color" column="color"/>
+	 </association>
+</resultMap>
+一对多 中  将  association 替换为 collection 即可
+
+使用时注意事项
+	一旦使用resultMap时 必须把所有属性一一对应起来，
+	在通用mapper 中 @Id()  @Column()   能解决频繁的配置
+

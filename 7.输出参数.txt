@@ -6,7 +6,7 @@
   b.对象类型(简单)
   c. 集合类型(接口声明使用 List<Persion> persions  但resultType="persion")
 
-2， resultMap
+2， resultMap(更详细使用， P9.关联查询)
   反之，如（bean中属性存在自定义类， 或者自定义的类型转换器， 或名称不同） 
   使用： 
     resultMap = "自定义id"
