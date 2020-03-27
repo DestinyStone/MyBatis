@@ -1,0 +1,21 @@
+日志整合
+	导入jar log4j.jar 
+
+开启日志
+	指定日志
+	  cofig.xml 中(这里是手动指定， 也可不指定)
+	  <setting>
+	      <setting name="logImpl" value="LOG4J">
+	  </setting>
+	编写输出格式
+	1, 创建 log4j.properties
+	2, 拷贝下面内容到文件中
+log4j.rootLogger=DEBUG, stdout
+log4j.logger.org.mybatis.example.BlogMapper=TRACE
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
+
+
+日志级别 
+DEBUG < INFO < WARN < ERROR
