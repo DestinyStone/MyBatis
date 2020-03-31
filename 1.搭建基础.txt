@@ -20,8 +20,8 @@ public class Persion {
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bean.PersionMapper">
-	 <select id="selectById" resultType="beam.Persion" parameterType="int">
+<mapper namespace="mapper.PersionMapper">
+	 <select id="selectById" resultType="bean.Persion" parameterType="int">
 	 	select * from persion where id = #{id}
 	 </select>
 </mapper>
